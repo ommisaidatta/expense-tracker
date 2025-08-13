@@ -21,22 +21,22 @@ _The main dashboard showing transaction summary and recent transactions_
 
 ### Add Transaction Form
 
-![Add Transaction](screenshots/Add Transaction.png)
+![Add Transaction](screenshots/AddTransaction.png)
 _Form to add new income or expense entries with category selection_
 
 ### Edit Transaction Modal
 
-![Edit Transaction](screenshots/Edit Transaction.png)
+![Edit Transaction](screenshots/EditTransaction.png)
 _Modal for editing existing transaction details_
 
 ### Transaction History
 
-![Transaction History](screenshots/Transaction History.png)
+![Transaction History](screenshots/TransactionHistory.png)
 _List view of all transactions with edit/delete actions_
 
 ### Filter Actions
 
-![Filter Actions](screenshots/Filter Action.png)
+![Filter Actions](screenshots/FilterAction.png)
 _Interface showing transaction filtering and management options_
 
 ## 🚀 Getting Started
@@ -52,7 +52,7 @@ _Interface showing transaction filtering and management options_
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/expense-tracker.git
+   git clone https://github.com/ommisaidatta/expense-tracker.git
    cd expense-tracker
    ```
 
