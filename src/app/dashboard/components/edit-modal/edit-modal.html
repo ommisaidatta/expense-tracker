@@ -1,0 +1,57 @@
+<div class="modal-overlay" *ngIf="transaction" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Edit Transaction</h2>
+      <button class="close-btn" (click)="onCancel()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <div class="transaction-preview">
+        <h3>{{ transaction.title }}</h3>
+        <p class="amount" [ngClass]="transaction.type">
+          {{ transaction.type === 'income' ? '+' : '-' }} {{ formatCurrency(transaction.amount) }}
+        </p>
+        <p class="category">{{ transaction.category }} • {{ transaction.date }}</p>
+      </div>
+
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" formControlName="title" placeholder="Transaction title" />
+        </div>
+
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="number" formControlName="amount" placeholder="Amount" />
+        </div>
+
+        <div class="form-group">
+          <label>Category</label>
+          <select formControlName="category">
+            <option value="select">Select Category</option>
+            <option value="income">💰 Income</option>
+            <option value="Food">🍽️ Food</option>
+            <option value="Transport">🚗 Transport</option>
+            <option value="Bills">📄 Bills</option>
+            <option value="Entertainment">🎬 Entertainment</option>
+            <option value="Other">📦 Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" formControlName="date" />
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="update-btn">Update Transaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,84 @@
+<div class="transaction-list-container">
+  <div class="txn-header">
+    <h2>Transaction History</h2>
+    <div class="filter-wrapper">
+      <button class="filter-btn" [class.active]="hasActiveFilters()" (click)="openFilters()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16v2l-6 6v6l-4 2v-8l-6-6V4z" />
+        </svg> 
+        <span class="btn-name">Filter</span>
+        <span class="filter-indicator" *ngIf="hasActiveFilters()">●</span>
+      </button>
+    </div>  
+    </div>
+
+    <div class="filter-card" *ngIf="showFilters">
+      
+      <div class="filter-form">
+        <div class="filter-group">
+          <label>Filter by Category:</label>
+          <select [(ngModel)]="tempSelectedCategory">
+            <option value="all">All Categories</option>
+            <option value="income">💰 Income</option>
+            <option value="Food">🍽️ Food</option>
+            <option value="Transport">🚗 Transport</option>
+            <option value="Bills">📄 Bills</option>
+            <option value="Entertainment">🎬 Entertainment</option>
+            <option value="Other">📦 Other</option>
+            <option *ngFor="let cat of getFilteredCategories()" [value]="cat">
+              {{ cat }}
+            </option>
+          </select>
+        </div>
+        
+        <div class="filter-row">
+          <div class="filter-group">
+            <label>From:</label>
+            <input type="date" [(ngModel)]="tempStartDate" placeholder="Start Date">
+          </div>
+          <div class="filter-group">
+            <label>To:</label>
+            <input type="date" [(ngModel)]="tempEndDate" placeholder="End Date">
+          </div>
+        </div>
+
+        <div class="filter-actions">
+          <button class="clear-btn" (click)="clearFilters()">Clear All</button>
+          <button class="cancel-btn" (click)="cancelFilters()">Cancel</button>
+          <button class="apply-filters-btn" (click)="applyFilterSettings()">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+
+  <div class="transactions-container">
+    <div class="transaction-card" *ngFor="let txn of displayedTransactions">
+      <div class="txn-details">
+        <h3 class="txn-title">{{ txn.title }}</h3>
+        <p class="txn-category">{{ txn.category }}  <span>• {{ txn.date }}</span></p>
+      </div>
+
+      <div class="txn-amount" [ngClass]="txn.type">
+        {{ txn.type === 'income' ? '+' : '-' }} ₹{{ txn.amount }}
+      </div>
+
+      <div class="txn-actions">
+        <button class="edit-btn" (click)="onEdit(txn)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </button>
+        <button class="delete-btn" (click)="onDelete(txn)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="load-more-wrapper" *ngIf="transactions.length > loadcount">
+      <button (click)="loadMore()">Load More</button>
+    </div>
+  </div>
+</div>

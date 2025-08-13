@@ -1,0 +1,37 @@
+.dashboard-container {
+    padding: 1rem;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    min-height: 100vh;
+    color: #fff;
+
+    .dashboard-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    }
+
+    .top-section {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        .left, .right {
+            flex: 1 1 400px;
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+    }
+
+    .bottom-section {
+        margin-top: 2rem;
+        background: #fff;
+        color: #000;
+        border-radius: 10px;
+        padding: 1.5rem;
+    }
+}

@@ -1,0 +1,28 @@
+<div class="dashboard-container">
+    <!-- HEADER  -->
+    <header class="dashboard-header">
+        <h1>Expense Tracker</h1>
+    </header>
+
+    <!-- TOP-SECTION  -->
+    <section class="top-section">
+        <div class="left">
+            <app-expense-form></app-expense-form>
+        </div>
+
+        <div class="right">
+            <app-summary-chart></app-summary-chart>
+        </div>
+    </section>
+
+    <!-- BOTTOM-SECTION  -->
+    <section class="bottom-section">
+        <app-transaction-list (editTxn)="onEditTransaction($event)"></app-transaction-list>
+    </section>
+
+    <!-- EDIT MODAL  -->
+    <app-edit-modal 
+        [transaction]="selectedTransaction" 
+        (closeModal)="onCloseModal()">
+    </app-edit-modal>
+</div>

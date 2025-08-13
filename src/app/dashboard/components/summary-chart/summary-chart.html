@@ -1,0 +1,71 @@
+<div class="summary-header">
+  <h2>Financial Overview</h2>
+
+  <div class="summary-controls">
+    <div class="view-toggle">
+      <button 
+        [class.active]="selectedView === 'yearly' && showDropdowns" 
+        (click)="setView('yearly')">
+        Yearly
+      </button>
+      <button 
+        [class.active]="selectedView === 'monthly' && showDropdowns" 
+        (click)="setView('monthly')">
+        Monthly
+      </button>
+    </div>
+    <div *ngIf="showDropdowns" class="dropdown-group">
+    <select [(ngModel)]="selectedYear" (change)="updateChartData()" class="dropdown">
+      <option [ngValue]="null" disabled hidden>Select Year</option>
+      <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+    </select>
+
+    <select *ngIf="selectedView === 'monthly'" [(ngModel)]="selectedMonth" (change)="updateChartData()" class="dropdown">
+      <option value="" disabled hidden>Select Month</option>
+      <option *ngFor="let m of months" [value]="m.value">{{ m.label }}</option>
+    </select>
+    </div>
+  </div>
+</div>
+
+  <div class="chart-container">
+    <div *ngIf="hasNoTransactions()" class="no-transactions-message">
+      <p>📅 No transactions found for {{ getSelectedMonthName() }} {{ selectedYear }}</p>
+      <p>Add some transactions to see your financial overview here!</p>
+    </div>
+    
+    <div *ngIf="!hasNoTransactions()" class="chart-bar">
+      <div class="income-bar" [style.width.%]="getIncomePercentage()">
+        <span class="label">Income</span>
+        <span class="amount">{{ formatCurrency(totalIncome) }}</span>
+      </div>
+      <div class="expense-bar" [style.width.%]="getExpensePercentage()">
+        <span class="label">Expenses</span>
+        <span class="amount">{{ formatCurrency(totalExpenses) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="balance-display" [class.positive]="balance >= 0" [class.negative]="balance < 0">
+    <h3>Current Balance</h3>
+    <p class="balance-amount">{{ formatCurrency(balance) }}</p>
+    <p class="balance-status">
+      <span *ngIf="balance >= 0">💰 You're in the green!</span>
+      <span *ngIf="balance < 0">⚠️ You're in the red</span>
+    </p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-item">
+      <h4>Total Transactions</h4>
+      <p>{{ filterExpenses.length }}</p>
+    </div>
+    <div class="stat-item">
+      <h4>Income Sources</h4>
+      <p>{{ getIncomeCount() }}</p>
+    </div>
+    <div class="stat-item">
+      <h4>Expense Categories</h4>
+      <p>{{ getExpenseCount() }}</p>
+    </div>
+  </div>
