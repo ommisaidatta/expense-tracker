@@ -158,7 +158,7 @@ export class SummaryChart implements OnInit {
       return this.selectedYear.toString();
     } else {
       const month = this.months.find(m => m.value === this.selectedMonth);
-       return month ? `${month.label} ${this.selectedYear}` : this.selectedYear.toString();
+       return month ? `${month.label}` : this.selectedYear.toString();
     }
   }
 
