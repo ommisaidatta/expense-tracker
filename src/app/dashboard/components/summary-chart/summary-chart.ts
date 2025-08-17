@@ -155,10 +155,10 @@ export class SummaryChart implements OnInit {
 
   getSelectedMonthName(): string {
     if (this.selectedView === 'yearly') {
-      return this.selectedYear.toString();
+      return '';
     } else {
       const month = this.months.find(m => m.value === this.selectedMonth);
-       return month ? `${month.label}` : this.selectedYear.toString();
+       return month ? `${month.label} ${this.selectedYear}` : this.selectedYear.toString();
     }
   }
 
